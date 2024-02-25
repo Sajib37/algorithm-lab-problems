@@ -2,18 +2,15 @@
 
 using namespace std;
 
-void conquer(int arr[], int si, int mid, int ei) {
+void conquer(int arr[], int si,int mid, int ei) {
     int merged[ei - si + 1];
+    int x = 0, i = si, j = mid + 1;
 
-    int i = si;
-    int j = mid + 1;
-    int x = 0;
     while (i <= mid && j <= ei) {
-        if (arr[i] <= arr[j]) {
+        if (arr[i] < arr[j]) {
             merged[x++] = arr[i++];
         }
-        else
-        {
+        else {
             merged[x++] = arr[j++];
         }
     }
@@ -25,17 +22,16 @@ void conquer(int arr[], int si, int mid, int ei) {
         merged[x++] = arr[j++];
     }
 
-    for (int k = 0, p = si ; k < (ei - si+1);k++, p++) {
+    for (int k = 0, p = si; k < ei - si + 1; k++, p++) {
         arr[p] = merged[k];
     }
 }
 
 void divide(int arr[], int si, int ei) {
-    if (si >= ei)
-    {
+    if (si >= ei) {
         return;
     }
-    int mid = (si + (ei - si) / 2);
+    int mid = si + (ei - si) / 2;
     divide(arr, si, mid);
     divide(arr, mid + 1, ei);
 

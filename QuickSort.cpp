@@ -3,34 +3,27 @@
 using namespace std;
 
 int partition(int arr[], int low, int high) {
-    int i = low - 1;
     int pivot = arr[high];
-
-    for (int j = low; j < high ;j++) {
-        if (arr[j] < pivot) {
-            i++;
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
+    int j = low - 1;
+    for (int i = low; i < high;i++) {
+        if (arr[i] < pivot) {
+            j++;
+            swap(arr[j], arr[i]);
         }
-
     }
 
-    i++;
-    int temp = arr[i];
-    arr[i] = arr[high];
-    arr[high] = temp;
+    j++;
+    swap(arr[j], arr[high]);
 
-    return i;
-
+    return j;
 }
 
 void quickSort(int arr[], int low, int high) {
     if (low < high) {
-       int pivotIdx = partition(arr, low, high);
+        int  pivotIdx = partition(arr, low, high);
 
-       quickSort(arr, low, pivotIdx - 1);
-       quickSort(arr, pivotIdx + 1, high);
+        quickSort(arr, low, pivotIdx - 1);
+        quickSort(arr, pivotIdx + 1, high);
     }
 }
 
